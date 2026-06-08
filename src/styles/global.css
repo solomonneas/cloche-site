@@ -173,51 +173,31 @@ a { color: inherit; }
   white-space: nowrap;
 }
 
-/* The shot card: cloche's signature output, a polished presentation image.
-   Mirrors the brigade receipt as this site's hero artifact. */
+/* The shot card: a real Cloche presentation image, this site's hero artifact.
+   The PNG already carries its own rounded corners, padding, and shadow, so it
+   is shown directly with a slight tilt rather than wrapped in window chrome. */
 .shot-card {
   width: 100%;
-  max-width: 380px;
-  background: var(--receipt-paper);
+  max-width: 420px;
+  margin: 3rem auto 0;
+}
+.shot-card img {
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(0 22px 50px rgba(0, 0, 0, 0.45));
   transform: rotate(-1.4deg);
 }
-[data-theme="light"] .shot-card {
-  box-shadow: 0 12px 36px rgba(29, 26, 20, 0.16);
-  border: 1px solid var(--hairline);
+[data-theme="light"] .shot-card img {
+  filter: drop-shadow(0 16px 38px rgba(29, 26, 20, 0.22));
 }
-.shot-window {
-  border-radius: 7px;
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: #fbfaf6;
-}
-.shot-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 10px;
-  background: #ece7dd;
-}
-.shot-dot { width: 9px; height: 9px; border-radius: 50%; }
-.shot-title {
-  margin-left: 8px;
+.shot-caption {
+  margin: 1.4rem 4px 0;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.66rem;
-  color: #6b6253;
-  letter-spacing: 0.04em;
-}
-.shot-body { padding: 14px 14px 16px; }
-.shot-line { height: 9px; border-radius: 3px; background: #d9d2c4; margin-bottom: 9px; }
-.shot-line.accent { background: var(--accent); opacity: 0.85; }
-.shot-caption {
-  margin: 12px 2px 0;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.62rem;
   letter-spacing: 0.06em;
-  color: var(--receipt-dim);
+  color: var(--text-dim);
   display: flex;
   justify-content: space-between;
 }
