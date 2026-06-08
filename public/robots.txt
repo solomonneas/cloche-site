@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cloche.solomonneas.dev/sitemap.xml
+Sitemap: https://cloche.escoffierlabs.dev/sitemap.xml
