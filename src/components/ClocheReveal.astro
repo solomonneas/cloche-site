@@ -1,0 +1,345 @@
+---
+// The cloche reveal: a silver serving dome over a plate. On hover (or for
+// reduced-motion, by default) the dome lifts and tilts to reveal a framed
+// screenshot plated underneath. The name is the prop.
+---
+<figure
+  class="cloche-scene"
+  tabindex="0"
+  aria-label="A silver serving dome over a plate. Lifting the dome reveals a framed screenshot underneath: a small app window with a chart, captioned captured 2026-06-12 1440 by 900 shot.png."
+>
+  <div class="cloche-stage">
+    <!-- The plated screenshot, revealed under the dome -->
+    <div class="plated" aria-hidden="true">
+      <div class="shot-window">
+        <div class="shot-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="shot-title font-mono">shot.png</span>
+        </div>
+        <div class="shot-body">
+          <div class="bars">
+            <span style="--h: 38%"></span>
+            <span style="--h: 64%"></span>
+            <span style="--h: 50%"></span>
+            <span style="--h: 82%"></span>
+            <span style="--h: 70%"></span>
+          </div>
+          <div class="ticks">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+      <figcaption class="shot-tag font-mono">captured &middot; 2026-06-12 &middot; 1440x900 &middot; shot.png</figcaption>
+    </div>
+
+    <!-- The silver dome and its knob -->
+    <div class="cloche" aria-hidden="true">
+      <span class="cloche-knob"></span>
+      <span class="cloche-dome"></span>
+    </div>
+
+    <!-- The serving plate -->
+    <div class="plate" aria-hidden="true">
+      <span class="plate-top"></span>
+      <span class="plate-base"></span>
+    </div>
+  </div>
+
+  <p class="cloche-hint font-mono">lift the dome, the shot is plated</p>
+</figure>
+
+<style>
+  .cloche-scene {
+    margin: 3rem auto 0;
+    max-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    outline: none;
+  }
+
+  .cloche-stage {
+    position: relative;
+    width: 18rem;
+    height: 14rem;
+  }
+
+  /* ---- The serving plate ---- */
+  .plate {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16rem;
+    z-index: 1;
+  }
+  .plate-top {
+    display: block;
+    width: 16rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    background:
+      radial-gradient(ellipse 60% 90% at 50% 36%, #f4f5f7 0%, #d3d8de 42%, #aeb6bf 72%, #8c949d 100%);
+    box-shadow:
+      inset 0 2px 4px rgba(255, 255, 255, 0.6),
+      inset 0 -2px 6px rgba(0, 0, 0, 0.18);
+  }
+  .plate-base {
+    display: block;
+    width: 9.5rem;
+    height: 0.9rem;
+    margin: -0.55rem auto 0;
+    border-radius: 50%;
+    background: radial-gradient(ellipse 60% 100% at 50% 40%, #c7cdd4 0%, #9aa2ab 60%, #767e87 100%);
+    box-shadow: 0 16px 26px rgba(0, 0, 0, 0.42);
+  }
+  [data-theme='light'] .plate-top {
+    background:
+      radial-gradient(ellipse 60% 90% at 50% 36%, #ffffff 0%, #e6e1d6 44%, #cabf9f 76%, #b8ac8a 100%);
+    box-shadow:
+      inset 0 2px 4px rgba(255, 255, 255, 0.8),
+      inset 0 -2px 6px rgba(120, 105, 80, 0.22);
+  }
+  [data-theme='light'] .plate-base {
+    background: radial-gradient(ellipse 60% 100% at 50% 40%, #ece6d8 0%, #cabf9f 60%, #b3a684 100%);
+    box-shadow: 0 16px 26px rgba(29, 26, 20, 0.2);
+  }
+
+  /* ---- The plated screenshot under the dome ---- */
+  .plated {
+    position: absolute;
+    bottom: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.12s;
+  }
+  .shot-window {
+    width: 11rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--hairline-strong);
+    background: var(--bg-panel);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    transform: rotate(-1.6deg);
+  }
+  [data-theme='light'] .shot-window {
+    box-shadow: 0 10px 22px rgba(29, 26, 20, 0.18);
+  }
+  .shot-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.35rem 0.55rem;
+    background: var(--bg-panel-2);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .shot-bar .dot {
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: var(--text-dim);
+    opacity: 0.65;
+  }
+  .shot-bar .dot:first-child { background: var(--accent); opacity: 0.9; }
+  .shot-title {
+    margin-left: auto;
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+  }
+  .shot-body {
+    padding: 0.7rem 0.7rem 0.8rem;
+    background: var(--term-bg);
+  }
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.35rem;
+    height: 3.2rem;
+  }
+  .bars span {
+    flex: 1;
+    height: var(--h);
+    border-radius: 2px 2px 0 0;
+    background: linear-gradient(to top, color-mix(in srgb, var(--accent) 55%, transparent), var(--accent));
+  }
+  .ticks {
+    display: flex;
+    gap: 0.35rem;
+    margin-top: 0.45rem;
+  }
+  .ticks span {
+    height: 0.28rem;
+    border-radius: 99px;
+    background: var(--hairline-strong);
+  }
+  .ticks span:nth-child(1) { width: 38%; }
+  .ticks span:nth-child(2) { width: 24%; }
+  .ticks span:nth-child(3) { width: 30%; }
+  .shot-tag {
+    background: var(--receipt-paper);
+    color: var(--receipt-dim);
+    border: 1px solid var(--receipt-rule);
+    border-radius: 2px;
+    padding: 0.18rem 0.45rem;
+    font-size: 0.52rem;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    transform: rotate(1deg);
+  }
+
+  /* ---- The silver dome ---- */
+  .cloche {
+    position: absolute;
+    bottom: 1.35rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 13rem;
+    height: 8.4rem;
+    transition: transform 0.4s cubic-bezier(0.34, 1.2, 0.5, 1);
+    transform-origin: bottom center;
+    will-change: transform;
+  }
+  .cloche-dome {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 13rem;
+    height: 7.6rem;
+    border-radius: 50% 50% 8% 8% / 88% 88% 12% 12%;
+    background:
+      radial-gradient(ellipse 38% 60% at 32% 26%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(105deg,
+        #6f777f 0%,
+        #aab1b9 14%,
+        #eef1f4 30%,
+        #c2c8cf 46%,
+        #969da6 60%,
+        #d6dbe0 76%,
+        #818892 92%,
+        #5e656d 100%);
+    box-shadow:
+      inset 0 -10px 18px rgba(0, 0, 0, 0.32),
+      inset 0 4px 8px rgba(255, 255, 255, 0.5),
+      0 14px 28px rgba(0, 0, 0, 0.4);
+  }
+  .cloche-dome::after {
+    /* lower reflective band */
+    content: '';
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: 8%;
+    height: 26%;
+    border-radius: 50%;
+    background: linear-gradient(105deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.28) 30%,
+      rgba(255, 255, 255, 0) 55%,
+      rgba(255, 255, 255, 0.18) 80%,
+      rgba(255, 255, 255, 0) 100%);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .cloche-knob {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background:
+      radial-gradient(ellipse 50% 50% at 38% 30%, #ffffff 0%, #cfd4da 36%, #9aa1aa 70%, #6c737c 100%);
+    box-shadow:
+      inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+      0 3px 6px rgba(0, 0, 0, 0.35);
+    z-index: 1;
+  }
+  .cloche-knob::after {
+    /* short neck joining knob to dome */
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.5rem;
+    height: 0.7rem;
+    border-radius: 0 0 3px 3px;
+    background: linear-gradient(to right, #828a93, #c7cdd3 50%, #7d858e);
+  }
+  [data-theme='light'] .cloche-dome {
+    background:
+      radial-gradient(ellipse 38% 60% at 32% 26%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(105deg,
+        #9a958a 0%,
+        #c9c3b4 14%,
+        #f7f3ea 30%,
+        #ddd6c6 46%,
+        #b7b09f 60%,
+        #ece6d8 76%,
+        #a39c8c 92%,
+        #837c6e 100%);
+    box-shadow:
+      inset 0 -10px 18px rgba(60, 50, 30, 0.26),
+      inset 0 4px 8px rgba(255, 255, 255, 0.7),
+      0 14px 28px rgba(29, 26, 20, 0.22);
+  }
+  [data-theme='light'] .cloche-knob {
+    background:
+      radial-gradient(ellipse 50% 50% at 38% 30%, #ffffff 0%, #e6e0d2 36%, #b8b09e 70%, #968e7c 100%);
+  }
+  [data-theme='light'] .cloche-knob::after {
+    background: linear-gradient(to right, #968e7c, #ddd6c6 50%, #918a78);
+  }
+
+  /* ---- The lift ---- */
+  .cloche-scene:hover .cloche,
+  .cloche-scene:focus-visible .cloche {
+    transform: translateX(-50%) translateY(-6.2rem) rotate(-7deg);
+  }
+  .cloche-scene:hover .plated,
+  .cloche-scene:focus-visible .plated {
+    opacity: 1;
+  }
+
+  .cloche-hint {
+    margin-top: 1.3rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  /* Reduced motion: show the dome already lifted so the shot is visible
+     without any animation, and freeze all transitions. */
+  @media (prefers-reduced-motion: reduce) {
+    .cloche {
+      transition: none;
+      transform: translateX(-50%) translateY(-6.2rem) rotate(-7deg);
+    }
+    .plated {
+      transition: none;
+      opacity: 1;
+    }
+    .cloche-scene:hover .cloche,
+    .cloche-scene:focus-visible .cloche {
+      transform: translateX(-50%) translateY(-6.2rem) rotate(-7deg);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .cloche-stage { width: 16rem; height: 13rem; }
+    .plate, .plate-top { width: 14rem; }
+    .cloche, .cloche-dome { width: 11.5rem; }
+    .cloche-dome { height: 6.8rem; }
+  }
+</style>

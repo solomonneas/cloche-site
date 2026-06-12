@@ -4,6 +4,7 @@
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
 @import "@fontsource/ibm-plex-mono/600.css";
+@import "@fontsource/caveat/600.css";
 
 /* Dark: the ledger. Ink ground, amber accent, cream receipt. */
 :root, [data-theme="dark"] {
@@ -171,33 +172,4 @@ a { color: inherit; }
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   color: var(--text);
   white-space: nowrap;
-}
-
-/* The shot card: a real Cloche presentation image, this site's hero artifact.
-   The PNG already carries its own rounded corners, padding, and shadow, so it
-   is shown directly with a slight tilt rather than wrapped in window chrome. */
-.shot-card {
-  width: 100%;
-  max-width: 420px;
-  margin: 3rem auto 0;
-}
-.shot-card img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  filter: drop-shadow(0 22px 50px rgba(0, 0, 0, 0.45));
-  transform: rotate(-1.4deg);
-}
-[data-theme="light"] .shot-card img {
-  filter: drop-shadow(0 16px 38px rgba(29, 26, 20, 0.22));
-}
-.shot-caption {
-  margin: 1.4rem 4px 0;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.06em;
-  color: var(--text-dim);
-  display: flex;
-  justify-content: space-between;
 }

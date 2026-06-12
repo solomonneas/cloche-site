@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CopyCommand from '../components/CopyCommand.astro';
+import ClocheReveal from '../components/ClocheReveal.astro';
 import { SITE, EXTERNAL } from '../lib/site.ts';
 
 const MODES = [
@@ -89,14 +90,7 @@ const COMMANDS = [
         </div>
         <p class="text-sm mt-3" style="color: var(--text-muted);">The name is the silver dome that presents a dish cleanly. Cloche does that for your screen.</p>
 
-        <figure class="shot-card">
-          <img src="/shot-card.png" width="880" height="887" loading="eager" decoding="async"
-            alt="A real Cloche shot card: the GNOME Settings window captured with cloche, cleaned up with rounded corners, padding, and a soft shadow on a warm background." />
-          <figcaption class="shot-caption">
-            <span>shot-card.png</span>
-            <span>cloche capture --target active</span>
-          </figcaption>
-        </figure>
+        <ClocheReveal />
       </div>
     </header>
 
@@ -240,4 +234,5 @@ const COMMANDS = [
   .hero-glow {
     background: radial-gradient(ellipse 50% 55% at 50% 28%, color-mix(in srgb, var(--accent) 7%, transparent) 0%, transparent 70%);
   }
+  .hero { padding-bottom: 1.5rem; }
 </style>
