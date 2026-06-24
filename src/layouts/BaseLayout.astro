@@ -12,6 +12,7 @@ const {
 
 const siteUrl = Astro.site ?? new URL(SITE.url);
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const imageUrl = new URL(SITE.image ?? '/og-card.png', siteUrl).toString();
 const keywords = [
   'Cloche',
   'desktop capture CLI',
@@ -61,9 +62,15 @@ const structuredData = {
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content={SITE.name} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={`${SITE.name} - ${description}`} />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1260" />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
     <link rel="icon" href="/favicon.svg" />
     <Analytics />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
