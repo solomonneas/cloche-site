@@ -1,12 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="12" fill="#0d1014"/>
-  <!-- notification bell -->
-  <path d="M22 42 C22 30, 26 24, 32 24 C38 24, 42 30, 42 42 L45 46 L19 46 Z"
-    fill="none" stroke="#e0a45c" stroke-width="3" stroke-linejoin="round"/>
-  <!-- clapper -->
-  <path d="M28 46 a4 4 0 0 0 8 0" fill="none" stroke="#e0a45c" stroke-width="3" stroke-linecap="round"/>
-  <!-- top knob -->
-  <circle cx="32" cy="20" r="2.5" fill="#e0a45c"/>
-  <!-- notification dot -->
-  <circle cx="44" cy="22" r="6" fill="#e0a45c" stroke="#0d1014" stroke-width="2.5"/>
+  <!-- domed serving cloche: half-dome + knob on a plate baseline -->
+  <path d="M16 44 C16 27 22 21 32 21 C42 21 48 27 48 44" fill="none" stroke="#e0a45c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32" cy="17" r="2.5" fill="#e0a45c"/>
+  <path d="M17 48 H27 M37 48 H47" fill="none" stroke="#9aa4b2" stroke-width="3" stroke-linecap="round"/>
 </svg>
