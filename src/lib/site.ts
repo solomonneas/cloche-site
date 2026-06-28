@@ -9,7 +9,7 @@ export const SITE = {
     'Cloche is an agent-neutral desktop capture CLI: polished shot cards, raw images, metadata, and stable JSON for agents, with an optional MCP server.',
   url: 'https://cloche.escoffierlabs.dev',
   install: 'cargo install cloche',
-  version: 'v0.5.1',
+  version: 'v0.6.0',
 };
 
 export const NAV_LINKS = [
