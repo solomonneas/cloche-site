@@ -27,15 +27,18 @@ const keywords = [
 ];
 const jsonLd = graph([
   organizationLd(),
-  softwareApplicationLd({
-    name: SITE.name,
-    siteUrl,
-    description,
-    image: absoluteImage(siteUrl, SITE.image),
-    codeRepository: EXTERNAL.github,
-    softwareVersion: SITE.version,
-    license: EXTERNAL.license,
-  }),
+  {
+    ...softwareApplicationLd({
+      name: SITE.name,
+      siteUrl,
+      description,
+      image: absoluteImage(siteUrl, SITE.image),
+      codeRepository: EXTERNAL.github,
+      softwareVersion: SITE.version,
+      license: EXTERNAL.license,
+    }),
+    sameAs: ['https://www.wikidata.org/wiki/Q140380340', EXTERNAL.github, SITE.url],
+  },
 ]);
 ---
 <!DOCTYPE html>
