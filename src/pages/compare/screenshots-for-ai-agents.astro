@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CopyCommand from '../../components/CopyCommand.astro';
+import { SITE, EXTERNAL } from '../../lib/site.ts';
+
+const title = 'Agent-neutral desktop screenshots for people and AI agents';
+const description =
+  'Agents need polished, stable screenshots with structured output. Cloche captures the desktop with a clean image and stable JSON, plus an optional MCP server.';
+
+const COMPARISON = [
+  {
+    cap: 'What it captures',
+    cloche: 'Any desktop app or window, plus full screen',
+    playwright: 'Web pages inside a controlled browser only',
+  },
+  {
+    cap: 'How you call it',
+    cloche: 'A standalone CLI command, or a stdio MCP server any agent can call',
+    playwright: 'A script you write against the browser automation API',
+  },
+  {
+    cap: 'Structured output',
+    cloche: 'Stable JSON on stdout, with a published schema (cloche schema)',
+    playwright: 'A returned image buffer or file; structure is whatever your script builds',
+  },
+  {
+    cap: 'Presentation',
+    cloche: 'Optional polished card: background cleanup, rounded corners, padding, shadow',
+    playwright: 'Raw page screenshot; framing is up to you',
+  },
+  {
+    cap: 'Agent integration',
+    cloche: 'Agent-neutral: any harness or MCP client can call the same command',
+    playwright: 'Tied to the script and runtime that drives the browser',
+  },
+  {
+    cap: 'Best fit',
+    cloche: 'Capturing arbitrary desktop apps for people and agents',
+    playwright: 'End-to-end testing and scraping of web pages',
+  },
+];
+
+const FAQ = [
+  {
+    q: 'Does Cloche replace Playwright or Puppeteer?',
+    a: 'No. If your target is a web page and you are already driving a browser, Playwright and Puppeteer screenshots are the right tool and you should keep using them. Cloche covers the case those tools do not: capturing any desktop application, not just a browser tab.',
+  },
+  {
+    q: 'Why does stable JSON matter for an agent?',
+    a: 'An agent that calls a capture command needs to parse the result the same way every time. Cloche prints the same structured object on stdout for every capture, and the schema is published with cloche schema, so an agent turn or a script can rely on the shape rather than scraping log lines.',
+  },
+  {
+    q: 'Do I have to wire it into one specific agent stack?',
+    a: 'No. Cloche is a plain CLI and an optional stdio MCP server. It works from a shell script, from Codex, OpenClaw, Claude Code, or any MCP client. The capture side stays neutral so you are not locked to one harness.',
+  },
+];
+---
+<BaseLayout title={title} description={description}>
+  <main>
+    <header class="hero relative overflow-hidden">
+      <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
+      <div class="relative px-6 md:px-10 py-20 max-w-3xl mx-auto text-center flex flex-col items-center">
+        <p class="kicker">[ COMPARE &middot; SCREENSHOTS FOR AI AGENTS ]</p>
+        <h1 class="font-display text-4xl md:text-5xl leading-[1.06] mt-3">
+          Agent-neutral desktop screenshots <span style="color: var(--accent);">for people and AI agents</span>
+        </h1>
+        <p class="text-lg mt-5 max-w-2xl mx-auto" style="color: var(--text-muted);">
+          If you need an AI agent to take screenshots, the practical question is what it can capture and
+          whether the output is stable enough to parse. Cloche captures any desktop app or window, not just
+          a browser tab, and prints stable JSON on stdout with a published schema. It runs as a plain CLI or
+          a small stdio MCP server, so any agent can call the same command. If you only ever screenshot web
+          pages inside a Playwright or Puppeteer script, you already have that and do not need this.
+        </p>
+        <div class="flex flex-wrap gap-3 mt-7 items-center justify-center">
+          <CopyCommand command={SITE.install} />
+          <a href="/" class="text-sm font-semibold px-4 py-2 rounded-md" style="background: var(--accent); color: var(--on-accent);">What is Cloche? &rarr;</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="px-6 md:px-10 py-14 max-w-4xl mx-auto">
+      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 01 &middot; THE PROBLEM ]</h2></div>
+      <div class="max-w-2xl">
+        <p class="mb-4" style="color: var(--text-muted);">
+          Agents that work on a desktop need to see the screen. The common screenshot tooling is
+          browser-only: Playwright and Puppeteer capture a page inside a browser they control, and the
+          screenshot is tied to the script that drives that browser. That covers web pages well, but it does
+          not cover a native editor, a terminal, a settings window, or any other desktop app an agent might
+          need to look at.
+        </p>
+        <p class="mb-4" style="color: var(--text-muted);">
+          The second half of the problem is output. An agent calling a capture step needs a result it can
+          parse the same way every run. A raw image buffer or an ad hoc log line forces every caller to build
+          its own glue. What an agent wants is a single command that captures the desktop and returns
+          structured, predictable output.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-6 md:px-10 py-14 max-w-4xl mx-auto">
+      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 02 &middot; CLOCHE VS BROWSER SCREENSHOTS ]</h2></div>
+      <p class="max-w-2xl mb-8" style="color: var(--text-muted);">
+        A fair, capability-only comparison against Playwright and Puppeteer screenshots, the tools people
+        most often reach for. These compare what each does, not benchmarks or counts.
+      </p>
+      <table class="cmd-table">
+        <thead>
+          <tr><th>Capability</th><th>Cloche</th><th>Playwright / Puppeteer screenshots</th></tr>
+        </thead>
+        <tbody>
+          {COMPARISON.map((row) => (
+            <tr><td>{row.cap}</td><td>{row.cloche}</td><td>{row.playwright}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="px-6 md:px-10 py-14 max-w-6xl mx-auto">
+      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 03 &middot; WHEN TO USE IT, WHEN YOU DON'T ]</h2></div>
+      <div class="card-grid">
+        <div class="shelf-card">
+          <h3>Use Cloche when</h3>
+          <p>You need an agent or a script to capture a desktop app or window, not just a browser tab, and you want stable JSON the caller can parse the same way every time.</p>
+        </div>
+        <div class="shelf-card">
+          <h3>Use Cloche when</h3>
+          <p>You want one capture command that works from a shell script, Codex, OpenClaw, Claude Code, or any MCP client, instead of binding the capture side to a single agent stack.</p>
+        </div>
+        <div class="shelf-card">
+          <h3>You do not need this when</h3>
+          <p>You only ever screenshot web pages inside a Playwright or Puppeteer script. You already have screenshot capture in that runtime, and adding a desktop tool buys you nothing. Keep using the browser tool you have.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 md:px-10 py-14 max-w-4xl mx-auto">
+      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 04 &middot; FAQ ]</h2></div>
+      <div class="max-w-2xl flex flex-col gap-6">
+        {FAQ.map((item) => (
+          <div>
+            <h3 class="font-display text-lg mb-2">{item.q}</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="px-6 md:px-10 py-14 max-w-4xl mx-auto">
+      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 05 &middot; TRY IT ]</h2></div>
+      <div class="max-w-2xl">
+        <p class="mb-5" style="color: var(--text-muted);">
+          Cloche is a Rust CLI under the Apache-2.0 license. Install it, then run a capture and read the JSON.
+        </p>
+        <div class="flex flex-wrap gap-3 items-center">
+          <CopyCommand command={SITE.install} />
+          <a href="/" class="text-sm px-4 py-2 rounded-md border inline-block"
+            style="border-color: var(--hairline); background: var(--bg-panel);">Cloche home &rarr;</a>
+          <a href={EXTERNAL.github} class="text-sm px-4 py-2 rounded-md border inline-block"
+            style="border-color: var(--hairline); background: var(--bg-panel);">Source on GitHub &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .hero-glow {
+    background: radial-gradient(ellipse 50% 55% at 50% 28%, color-mix(in srgb, var(--accent) 7%, transparent) 0%, transparent 70%);
+  }
+  .hero { padding-bottom: 1.5rem; }
+</style>

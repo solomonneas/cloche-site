@@ -2,7 +2,7 @@ import { SITE } from '../lib/site.ts';
 
 export async function GET({ site }: { site?: URL }) {
   const base = site ?? new URL(SITE.url);
-  const urls = ['/']
+  const urls = ['/', '/compare/screenshots-for-ai-agents']
     .map((path) => {
       const loc = new URL(path, base).toString();
       return ['  <url>', `    <loc>${loc}</loc>`, '    <changefreq>weekly</changefreq>', '  </url>'].join('\n');
