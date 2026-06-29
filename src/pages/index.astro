@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CopyCommand from '../components/CopyCommand.astro';
 import ClocheReveal from '../components/ClocheReveal.astro';
+import FleetLinks from '../components/FleetLinks.astro';
 import { SITE, EXTERNAL } from '../lib/site.ts';
 
 const MODES = [
@@ -228,6 +229,8 @@ const COMMANDS = [
           style="border-color: var(--hairline); background: var(--bg-panel);">Cookbook &rarr;</a>
       </div>
     </section>
+
+    <FleetLinks current="cloche-site" />
   </main>
 </BaseLayout>
 
