@@ -1,5 +1,17 @@
 # AGENTS.md - Working In This Repo
 
+## This Repo
+
+`cloche-site` is an Astro static site for `cloche.escoffierlabs.dev`, the landing
+page for Cloche.
+
+- **Stack:** Astro 6.4.2, Tailwind CSS, TypeScript, and Vercel Analytics in a
+  package named `cloche-site`.
+- **Verify:** `npm run check` runs `astro check`; `npm run build` runs
+  `astro build`.
+- **Layout:** `src/`, `public/`, `astro.config.mjs`, `vercel.json`, and
+  `package.json` live at the repo root; there is no root `scripts/` directory.
+
 This repo is Brigade-wired. These are the operating rules for any agent working here.
 
 ## Every Session
