@@ -39,3 +39,17 @@ For large scoping work, invoke `ultra-work-scout` first. It is installed with th
 - Default to reading more before writing more.
 - Ask one specific question rather than guess.
 - Surface tradeoffs rather than presenting decisions as facts.
+
+<!-- brigade:claude-work-loop:start -->
+@AGENTS.md
+
+## Brigade work loop (enforced)
+
+Brigade hooks enforce this loop in every configured repository:
+
+- Read the injected `brigade work brief` before real work.
+- Run checks through `brigade work verify run --target . --command "<check>" --capture brigade-work`.
+- Do not run tests, linters, type checks, builds, or verification scripts raw.
+- After code or configuration changes, write a Memory Handoff before finishing.
+- The same requirements apply inside subagents and after changing directories.
+<!-- brigade:claude-work-loop:end -->
