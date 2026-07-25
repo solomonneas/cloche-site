@@ -99,3 +99,4 @@ memory/handoff-inbox/
 scripts/*.md
 # <<< brigade gitignore block <<<
 .codex/
+.graphtrail/

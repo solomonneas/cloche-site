@@ -4,9 +4,9 @@ export const SITE = {
   seoTitle: 'Cloche - agent-neutral desktop capture',
   subtitle: 'Part of the Brigade fleet from Escoffier Labs',
   description:
-    'Cloche is an agent-neutral desktop capture CLI for people and agents. It captures the active app or window, writes a polished shot card plus raw image and metadata, and prints stable JSON so scripts, local tools, and AI agents all use the same command. Runs as a CLI or a small stdio MCP server.',
+    'Cloche is an agent-neutral desktop capture CLI for people and agents. It captures the active app or window, writes a polished shot card on a procedural deep-space backdrop plus raw image and metadata, and prints stable JSON so scripts, local tools, and AI agents all use the same command. Cloche Studio picks palettes and scenes visually. Runs as a CLI or a small stdio MCP server.',
   metaDescription:
-    'Cloche is an agent-neutral desktop capture CLI: polished shot cards, raw images, metadata, and stable JSON for agents, with an optional MCP server.',
+    'Cloche is an agent-neutral desktop capture CLI: deep-space shot cards, Cloche Studio, raw images, metadata, and stable JSON for agents.',
   url: 'https://cloche.escoffierlabs.dev',
   install: 'cargo install cloche',
   version: 'v0.7.0',
@@ -15,8 +15,8 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { label: 'Proof', href: '#proof' },
-  { label: 'A shot', href: '#shot' },
-  { label: 'Modes', href: '#modes' },
+  { label: 'Space', href: '#space' },
+  { label: 'Studio', href: '#studio' },
   { label: 'Commands', href: '#commands' },
 ];
 

@@ -1,7 +1,7 @@
 ---
 /**
  * Product home: proof-first Cloche face.
- * Real shot cards lead; fleet affiliation stays light at the end.
+ * Space cards and Studio lead; fleet affiliation stays light at the end.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CopyCommand from '../components/CopyCommand.astro';
@@ -10,9 +10,19 @@ import FleetLinks from '../components/FleetLinks.astro';
 import { SITE, EXTERNAL } from '../lib/site.ts';
 import '../styles/product.css';
 
+const SPACE_PALETTES = [
+  { name: 'orion-emission', src: '/images/space/orion-emission.webp' },
+  { name: 'carina-hubble', src: '/images/space/carina-hubble.webp' },
+  { name: 'milkyway-core', src: '/images/space/milkyway-core.webp' },
+  { name: 'horsehead-flame', src: '/images/space/horsehead-flame.webp' },
+  { name: 'eagle-pillars', src: '/images/space/eagle-pillars.webp' },
+  { name: 'crab-remnant', src: '/images/space/crab-remnant.webp' },
+];
+
 const COMMANDS = [
   { cmd: 'capture --target active', desc: 'Focused app or window. Default.' },
-  { cmd: 'capture --target window --title Firefox', desc: 'Named window by title match.' },
+  { cmd: 'polish shot.png --palette milkyway-core --scene jwst', desc: 'Pin a deep-space look on an existing image.' },
+  { cmd: 'studio', desc: 'Local visual picker for palettes, scenes, and motifs.' },
   { cmd: 'preview', desc: 'Open the most recent capture.' },
   { cmd: 'gallery --limit 10', desc: 'Self-contained HTML gallery of recent shots.' },
   { cmd: 'schema', desc: 'Stable JSON schema for capture output.' },
@@ -27,45 +37,115 @@ const COMMANDS = [
         <p class="eyebrow">Escoffier Labs · Cloche</p>
         <h1>Lift the dome.<span class="accent">Present the shot.</span></h1>
         <p class="lede">
-          Desktop capture for people and agents. Raw image, polished card, stable JSON.
+          Desktop capture for people and agents. Raw image, deep-space card, stable JSON.
         </p>
         <div class="cta-row">
           <CopyCommand command={SITE.install} />
-          <a href="#shot">What's in a shot</a>
+          <a href="#space">See the skies</a>
         </div>
         <div class="meta">
           <span>MIT</span>
           <span>Linux + Windows</span>
-          <span>CLI or MCP</span>
+          <span>CLI · Studio · MCP</span>
         </div>
       </div>
       <div class="wrap-wide">
         <div class="proof-pair">
           <figure class="proof-card">
             <img
-              src="/images/shot-card-calculator.png"
-              alt="Polished Cloche shot card of a calculator window on a deep backdrop"
-              width="1200"
-              height="900"
+              src="/images/space/card-milkyway-core.webp"
+              alt="Polished Cloche shot card on a milkyway-core deep-space backdrop"
+              width="1280"
+              height="1028"
               loading="eager"
               decoding="async"
             />
-            <figcaption>shot-card.png · polished presentation</figcaption>
+            <figcaption>milkyway-core · seed 3</figcaption>
           </figure>
           <figure class="proof-card">
             <img
-              src="/images/shot-card-settings.png"
-              alt="Polished Cloche shot card of a settings window on a deep backdrop"
-              width="1200"
-              height="900"
+              src="/images/space/card-carina-jwst.webp"
+              alt="Polished Cloche shot card on a carina-hubble backdrop with JWST scene look"
+              width="1280"
+              height="1024"
               loading="eager"
               decoding="async"
             />
-            <figcaption>same kitchen · different window</figcaption>
+            <figcaption>carina-hubble · scene jwst</figcaption>
           </figure>
         </div>
       </div>
     </header>
+
+    <section class="band" id="space">
+      <div class="wrap">
+        <h2>Every card sits in a sky that never existed twice.</h2>
+        <p class="lede">
+          Deep-space palettes are sampled from real astrophotography, then drawn from noise at
+          render time. Pin a palette or a telescope look; the same
+          <code>--style-seed</code> reproduces one sky exactly.
+        </p>
+      </div>
+      <div class="wrap-wide">
+        <ul class="space-rail" aria-label="Deep-space palette samples">
+          {SPACE_PALETTES.map((p) => (
+            <li>
+              <img src={p.src} alt="" width="480" height="270" loading="lazy" decoding="async" />
+              <span>{p.name}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="dim space-rail-note">
+          Also: <code>pleiades-reflection</code>, <code>rho-ophiuchi</code>,
+          <code>andromeda-haze</code>, <code>lagoon-trifid</code>, <code>tarantula-web</code>,
+          <code>sombrero-dust</code>, and gradient or pattern backdrops when you want them.
+          Scenes include <code>jwst</code>, <code>alma</code>, <code>cmb</code>, and more.
+        </p>
+        <div class="copy-block">
+          <button type="button" class="copy-btn" data-copy>Copy</button>
+          <pre>{`cloche polish shot.png --palette horsehead-flame --scene alma --style-seed 7`}</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="studio">
+      <div class="wrap">
+        <h2>Cloche Studio is the visual side of the same config.</h2>
+        <p class="lede">
+          Toggle which backdrops stay in rotation, preview scene looks and motifs, then write the
+          preferences <code>capture</code> and <code>polish</code> already honor. Same flags in the
+          terminal; Studio just lets you see them first.
+        </p>
+      </div>
+      <div class="wrap-wide">
+        <figure class="studio-shot">
+          <img
+            src="/images/space/studio-ui.webp"
+            alt="Cloche Studio: live card preview, Randomize and Pin controls, and the matching cloche config set command"
+            width="1280"
+            height="900"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>cloche studio · local · writes ~/.config/cloche/config.json</figcaption>
+        </figure>
+        <figure class="studio-shot studio-shot-secondary">
+          <img
+            src="/images/space/studio-backdrops.webp"
+            alt="Cloche Studio backdrops grid showing deep-space and gradient palettes"
+            width="1280"
+            height="900"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>deep space · gradients · patterns · scene looks · motifs</figcaption>
+        </figure>
+        <div class="copy-block">
+          <button type="button" class="copy-btn" data-copy>Copy</button>
+          <pre>{`cloche studio`}</pre>
+        </div>
+      </div>
+    </section>
 
     <section class="band" id="shot">
       <div class="wrap">
@@ -82,9 +162,8 @@ const COMMANDS = [
           </dd>
           <dt>Card</dt>
           <dd>
-            <code>shot-card.png</code> framed for demos and posts. Seed the style when you need a
-            repeatable look.
-            <span class="cmd">--style-seed &lt;n&gt;</span>
+            <code>shot-card.png</code> framed on a procedural sky for demos and posts.
+            <span class="cmd">--palette · --scene · --style-seed</span>
           </dd>
           <dt>Contract</dt>
           <dd>
