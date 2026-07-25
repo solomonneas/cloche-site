@@ -10,12 +10,13 @@ export const SITE = {
   url: 'https://cloche.escoffierlabs.dev',
   install: 'cargo install cloche',
   version: 'v0.7.0',
+  image: '/og-card.png',
 };
 
 export const NAV_LINKS = [
-  { label: 'How it works', href: '#how-it-works' },
+  { label: 'Proof', href: '#proof' },
+  { label: 'A shot', href: '#shot' },
   { label: 'Modes', href: '#modes' },
-  { label: 'Output', href: '#output' },
   { label: 'Commands', href: '#commands' },
 ];
 

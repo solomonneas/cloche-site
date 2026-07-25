@@ -1,0 +1,304 @@
+/* Cloche product home. Tokens from global.css. Scoped under .product. */
+.product {
+  font-size: 16px;
+  line-height: 1.55;
+  overflow-x: clip;
+}
+
+.product a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.product a:hover {
+  text-decoration: underline;
+}
+
+.product .wrap {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 22px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.product .wrap-wide {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 22px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product section.band {
+  padding: 52px 0;
+  border-top: 1px solid var(--hairline);
+}
+.product section.band .wrap,
+.product section.band .wrap-wide {
+  text-align: center;
+}
+.product section.band .lede {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.product h1 {
+  font-size: clamp(1.85rem, 4.5vw, 2.65rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+.product h1 .accent {
+  color: var(--accent);
+  display: block;
+}
+.product h2 {
+  font-size: clamp(1.25rem, 2.3vw, 1.55rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+.product p {
+  margin: 0 0 12px;
+}
+.product .lede {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  max-width: 36rem;
+}
+.product .dim {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.product .muted {
+  color: var(--text-muted);
+}
+
+.product .hero {
+  position: relative;
+  min-height: 0;
+  display: block;
+  padding: 40px 0 36px;
+  overflow: visible;
+  isolation: isolate;
+}
+.product .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 40%, color-mix(in srgb, #6b8cae 6%, transparent), transparent 65%);
+}
+.product .hero .wrap {
+  text-align: center;
+}
+.product .hero .lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product .eyebrow {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.product .cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 10px;
+}
+
+.product .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  justify-content: center;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.product .proof-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 28px;
+  align-items: end;
+}
+@media (max-width: 720px) {
+  .product .proof-pair {
+    grid-template-columns: 1fr;
+  }
+}
+.product .proof-card {
+  margin: 0;
+  text-align: left;
+}
+.product .proof-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--hairline-strong);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  background: var(--bg-panel);
+}
+.product .proof-card figcaption {
+  margin-top: 8px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.product .anatomy {
+  border-top: 1px solid var(--hairline);
+  margin-top: 24px;
+  text-align: center;
+}
+.product .anatomy dt {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  padding-top: 16px;
+}
+.product .anatomy dd {
+  margin: 4px auto 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 48ch;
+}
+.product .anatomy dd:last-of-type {
+  border-bottom: 0;
+}
+.product .anatomy .cmd {
+  display: block;
+  margin-top: 6px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.product .mode-list {
+  list-style: none;
+  margin: 20px auto 0;
+  padding: 0;
+  max-width: 36rem;
+  text-align: left;
+}
+.product .mode-list li {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.product .mode-list li:last-child {
+  border-bottom: 0;
+}
+.product .mode-list .name {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.product .mode-list .state {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.product .mode-list .job {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.product .copy-block {
+  position: relative;
+  text-align: left;
+  width: fit-content;
+  max-width: min(36rem, 100%);
+  margin: 16px auto 0;
+  background: var(--term-bg);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.product .copy-block pre {
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+}
+.product .copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--hairline);
+  background: var(--bg-panel);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.product .cmd-table {
+  width: 100%;
+  max-width: 40rem;
+  margin: 20px auto 0;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.product .cmd-table th,
+.product .cmd-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--hairline);
+  vertical-align: top;
+}
+.product .cmd-table th {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.product .cmd-table td:first-child {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+.product .cmd-table td:last-child {
+  color: var(--text-muted);
+}
+
+.product .fleet-note {
+  margin-top: 16px;
+}
+.product .fleet-note a {
+  margin: 0 0.35rem;
+}

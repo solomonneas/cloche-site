@@ -25,23 +25,23 @@
   --on-accent: #0d1014;
 }
 
-/* Light: the receipt paper. Cream ground, ink text, deepened amber. */
+/* Light: cool paper, not cream-artisan. Deepened copper accent. */
 [data-theme="light"] {
-  --bg: #f5f2ea;
-  --bg-panel: #fffdf8;
-  --bg-panel-2: #f0ece1;
-  --text: #1d1a14;
-  --text-muted: #5c5448;
-  --text-dim: #736a5c;
-  --accent: #925f2b;
-  --hairline: #ddd5c4;
-  --hairline-strong: #c9bfa9;
-  --term-bg: #fffdf8;
-  --receipt-paper: #ffffff;
-  --receipt-ink: #1d1a14;
-  --receipt-dim: #75694f;
-  --receipt-rule: #d8d2c4;
-  --on-accent: #f5f2ea;
+  --bg: #eef1f5;
+  --bg-panel: #f7f9fc;
+  --bg-panel-2: #e4e9f0;
+  --text: #14181f;
+  --text-muted: #4a5564;
+  --text-dim: #6b7585;
+  --accent: #8a5728;
+  --hairline: #d0d7e2;
+  --hairline-strong: #b8c2d0;
+  --term-bg: #f7f9fc;
+  --receipt-paper: #f7f9fc;
+  --receipt-ink: #14181f;
+  --receipt-dim: #6b7585;
+  --receipt-rule: #c5cdd9;
+  --on-accent: #eef1f5;
 }
 
 html { background: var(--bg); color: var(--text); }

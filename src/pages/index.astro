@@ -1,244 +1,221 @@
 ---
+/**
+ * Product home: proof-first Cloche face.
+ * Real shot cards lead; fleet affiliation stays light at the end.
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CopyCommand from '../components/CopyCommand.astro';
 import ClocheReveal from '../components/ClocheReveal.astro';
 import FleetLinks from '../components/FleetLinks.astro';
 import { SITE, EXTERNAL } from '../lib/site.ts';
-
-const MODES = [
-  {
-    name: 'Shots',
-    state: 'available now',
-    desc: 'A still capture of the active app or window, with a raw image, a polished presentation card, metadata, and optional extracted text.',
-  },
-  {
-    name: 'Reels',
-    state: 'planned next',
-    desc: 'Short desktop recordings with the same Cloche presentation system: cursor emphasis, captions, and stable metadata. The Appreels prototype is the starting point.',
-  },
-  {
-    name: 'GIF export',
-    state: 'planned after Reels',
-    desc: 'Lightweight loops generated from finished Reels as a delivery format, not recorded as the primary source.',
-  },
-];
-
-const OUTPUTS = [
-  { file: 'shot.png', desc: 'The raw captured image, exactly as the compositor saw it.' },
-  { file: 'shot-card.png', desc: 'A presentation image with background cleanup, rounded corners, padding, and a soft shadow.' },
-  { file: 'metadata.json', desc: 'The same stable JSON object that is printed to stdout for scripts and agents.' },
-  { file: 'text.txt', desc: 'Optional best-effort accessible text from the focused app, when the OS exposes it.' },
-];
-
-const WHY = [
-  {
-    title: 'Agent-neutral by design',
-    desc: 'Use it with Codex, OpenClaw, Claude Code, Hermes, a local MCP client, or a plain shell script. Cloche fills the capture side without binding to any one agent stack.',
-  },
-  {
-    title: 'Stable JSON contract',
-    desc: 'Every capture prints the same structured object on stdout. Pipe it, parse it, or feed it straight into an agent turn. The schema is published with cloche schema.',
-  },
-  {
-    title: 'Linux first, Windows supported',
-    desc: 'OpenAI documents Appshots as a macOS feature for Codex. Cloche brings reliable captures to Linux and Windows from a normal CLI.',
-  },
-  {
-    title: 'CLI or MCP server',
-    desc: 'Run directly as a command, or expose the same code path as a small stdio MCP server with cloche mcp. One tool, two front doors.',
-  },
-  {
-    title: 'Honest exit codes',
-    desc: 'Capture exits 0 only when a raw image was written. Text and presentation-image failures are warnings, because accessibility and compositing vary by toolkit and OS.',
-  },
-  {
-    title: 'Reproducible cards',
-    desc: 'A style-seed reproduces a randomized card style exactly, so a polished shot can be regenerated the same way every time.',
-  },
-];
+import '../styles/product.css';
 
 const COMMANDS = [
-  { cmd: 'capture --target active', desc: 'Capture the focused app or window. The default target.' },
-  { cmd: 'capture --target window --title Firefox', desc: 'Capture a named window by title match.' },
-  { cmd: 'capture --target screen', desc: 'Full-screen capture, a fallback and debugging mode.' },
+  { cmd: 'capture --target active', desc: 'Focused app or window. Default.' },
+  { cmd: 'capture --target window --title Firefox', desc: 'Named window by title match.' },
   { cmd: 'preview', desc: 'Open the most recent capture.' },
-  { cmd: 'latest', desc: 'Print the path of the most recent shot directory.' },
-  { cmd: 'gallery --limit 10', desc: 'Build a self-contained HTML gallery of recent shots.' },
-  { cmd: 'list-windows --format json', desc: 'Enumerate capturable windows as JSON.' },
-  { cmd: 'codex-payload --thread-id ID DIR', desc: 'Emit a Codex turn/start payload from a shot.' },
-  { cmd: 'schema', desc: 'Print the stable JSON schema for capture output.' },
+  { cmd: 'gallery --limit 10', desc: 'Self-contained HTML gallery of recent shots.' },
+  { cmd: 'schema', desc: 'Stable JSON schema for capture output.' },
   { cmd: 'doctor --format json', desc: 'Validate capture support on this machine.' },
-  { cmd: 'mcp', desc: 'Run the small stdio MCP server over the same code path.' },
-  { cmd: 'reels render --input clip.mp4 --out reel.mp4', desc: 'Render a vertical video reel from a source clip through a bundled Remotion template.' },
+  { cmd: 'mcp', desc: 'Stdio MCP server over the same code path.' },
 ];
 ---
 <BaseLayout>
-  <main>
-    <header class="hero relative overflow-hidden">
-      <div class="hero-glow absolute inset-0" aria-hidden="true"></div>
-      <div class="relative px-6 md:px-10 py-24 max-w-3xl mx-auto text-center flex flex-col items-center">
-        <p class="kicker">[ DESKTOP CAPTURE &middot; {SITE.version} ]</p>
-        <h1 class="font-display text-5xl md:text-6xl leading-[1.04] mt-3">
-          Lift the dome. <span style="color: var(--accent);">Present the shot.</span>
-        </h1>
-        <p class="text-lg mt-4 max-w-xl mx-auto" style="color: var(--text-muted);">
-          Cloche is agent-neutral desktop capture for people and agents. It lifts the active app or
-          window, frames it into a polished card with raw image and metadata, and prints stable JSON
-          so a script, a local tool, and an AI agent can all use the same command.
+  <div class="product">
+    <header class="hero" id="proof">
+      <div class="wrap">
+        <p class="eyebrow">Escoffier Labs · Cloche</p>
+        <h1>Lift the dome.<span class="accent">Present the shot.</span></h1>
+        <p class="lede">
+          Desktop capture for people and agents. Raw image, polished card, stable JSON.
         </p>
-        <div class="flex flex-wrap gap-3 mt-7 items-center justify-center">
+        <div class="cta-row">
           <CopyCommand command={SITE.install} />
-          <a href={EXTERNAL.github} class="text-sm font-semibold px-4 py-2 rounded-md" style="background: var(--accent); color: var(--on-accent);">View on GitHub &rarr;</a>
+          <a href="#shot">What's in a shot</a>
         </div>
-        <p class="text-sm mt-3" style="color: var(--text-muted);">The name is the silver dome that presents a dish cleanly. Cloche does that for your screen.</p>
-
-        <ClocheReveal />
+        <div class="meta">
+          <span>MIT</span>
+          <span>Linux + Windows</span>
+          <span>CLI or MCP</span>
+        </div>
+      </div>
+      <div class="wrap-wide">
+        <div class="proof-pair">
+          <figure class="proof-card">
+            <img
+              src="/images/shot-card-calculator.png"
+              alt="Polished Cloche shot card of a calculator window on a deep backdrop"
+              width="1200"
+              height="900"
+              loading="eager"
+              decoding="async"
+            />
+            <figcaption>shot-card.png · polished presentation</figcaption>
+          </figure>
+          <figure class="proof-card">
+            <img
+              src="/images/shot-card-settings.png"
+              alt="Polished Cloche shot card of a settings window on a deep backdrop"
+              width="1200"
+              height="900"
+              loading="eager"
+              decoding="async"
+            />
+            <figcaption>same kitchen · different window</figcaption>
+          </figure>
+        </div>
       </div>
     </header>
 
-    <section id="how-it-works" class="px-6 md:px-10 py-14 max-w-6xl mx-auto">
-      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 01 &middot; CAPTURE ]</h2></div>
-      <div class="pantry-flow">
-        <div class="flow-node">
-          <h3>Point at a target</h3>
-          <ul>
-            <li>active: the focused app or window, the default</li>
-            <li>window: a named window by title match</li>
-            <li>screen: full screen, fallback and debugging</li>
-            <li>list-windows to enumerate what is capturable</li>
-            <li>doctor to check support before you trust it</li>
-          </ul>
-        </div>
-        <div class="flow-link">
-          <span class="arrow">&rarr;</span>
-          <span class="label">capture &middot; clean up &middot; frame the card &middot; print JSON</span>
-          <span class="arrow">&rarr;</span>
-        </div>
-        <div class="flow-node">
-          <h3>Get a shot directory</h3>
-          <ul>
-            <li>shot.png and a polished shot-card.png</li>
-            <li>metadata.json, the same object on stdout</li>
-            <li>optional text.txt from the focused app</li>
-            <li>codex-payload to hand a shot to a Codex turn</li>
-            <li>gallery, latest, and preview to revisit history</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="modes" class="px-6 md:px-10 py-14 max-w-6xl mx-auto">
-      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 02 &middot; MODES ]</h2></div>
-      <p class="max-w-2xl mb-8" style="color: var(--text-muted);">
-        Shots ship today. Reels and GIF export are on the roadmap, all sharing one presentation system
-        so a still and a clip come out of the same kitchen.
-      </p>
-      <div class="card-grid">
-        {MODES.map((m) => (
-          <div class="shelf-card">
-            <h3>{m.name}</h3>
-            <p><span class="font-mono" style="color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;">{m.state}</span></p>
-            <p>{m.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="px-6 md:px-10 py-14 max-w-6xl mx-auto">
-      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 03 &middot; WHY CLOCHE ]</h2></div>
-      <div class="card-grid">
-        {WHY.map((f) => (
-          <div class="shelf-card">
-            <h3>{f.title}</h3>
-            <p>{f.desc}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section id="output" class="px-6 md:px-10 py-14 max-w-4xl mx-auto">
-      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 04 &middot; OUTPUT ]</h2></div>
-      <p class="max-w-2xl mb-8" style="color: var(--text-muted);">
-        Each successful shot is a directory, not a single file. Raw and presentation images sit next
-        to the metadata, so a human and an agent can both pick the form they need.
-      </p>
-      <table class="cmd-table">
-        <thead>
-          <tr><th>File</th><th>What it holds</th></tr>
-        </thead>
-        <tbody>
-          {OUTPUTS.map((o) => (
-            <tr><td>{o.file}</td><td>{o.desc}</td></tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-
-    <section id="codex" class="px-6 md:px-10 py-14 max-w-4xl mx-auto">
-      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 05 &middot; AGENTS ]</h2></div>
-      <div class="max-w-2xl">
-        <p class="mb-4" style="color: var(--text-muted);">
-          Codex can resume threads that contain local images. Cloche generates the exact
-          <code class="font-mono" style="color: var(--accent);">turn/start</code> payload from a shot,
-          so a captured screen drops straight into an agent turn:
+    <section class="band" id="shot">
+      <div class="wrap">
+        <h2>One capture. Three forms you can use.</h2>
+        <p class="lede">
+          Exit 0 only when the raw image is written. Card polish and text extraction are warnings if
+          they fail, not silent zeros.
         </p>
-        <pre class="font-mono text-sm p-4 rounded-md border mb-4" style="border-color: var(--hairline); background: var(--term-bg); color: var(--text); overflow-x: auto;">{`{ "type": "localImage", "path": "/abs/path/shot.png", "detail": "high" }`}</pre>
-        <p class="mb-4" style="color: var(--text-muted);">
-          The same stable JSON feeds OpenClaw, Claude Code, Hermes, a local MCP client, or a plain
-          shell script. One capture command, every harness.
-        </p>
-        <a href={EXTERNAL.codexAppshots} class="text-sm px-4 py-2 rounded-md border inline-block"
-          style="border-color: var(--hairline); background: var(--bg-panel);">Codex capture reference &rarr;</a>
+        <dl class="anatomy">
+          <dt>Raw</dt>
+          <dd>
+            <code>shot.png</code> exactly as the compositor saw it.
+            <span class="cmd">cloche capture --target active</span>
+          </dd>
+          <dt>Card</dt>
+          <dd>
+            <code>shot-card.png</code> framed for demos and posts. Seed the style when you need a
+            repeatable look.
+            <span class="cmd">--style-seed &lt;n&gt;</span>
+          </dd>
+          <dt>Contract</dt>
+          <dd>
+            The same JSON on disk and stdout. Pipe it, parse it, or hand it to an agent.
+            <span class="cmd">cloche schema · metadata.json</span>
+          </dd>
+        </dl>
       </div>
     </section>
 
-    <section id="commands" class="px-6 md:px-10 py-14 max-w-4xl mx-auto">
-      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 06 &middot; COMMANDS ]</h2></div>
-      <table class="cmd-table">
-        <thead>
-          <tr><th>Command</th><th>What it does</th></tr>
-        </thead>
-        <tbody>
-          {COMMANDS.map((c) => (
-            <tr><td>cloche {c.cmd}</td><td>{c.desc}</td></tr>
-          ))}
-        </tbody>
-      </table>
-      <p class="text-sm mt-5" style="color: var(--text-muted);">
-        The old <code class="font-mono" style="color: var(--accent);">appshots</code> command remains as
-        an alias for the same code path during the rename.
-      </p>
+    <section class="band" id="modes">
+      <div class="wrap">
+        <h2>Shots ship. Motion is next.</h2>
+        <p class="lede">One presentation system. Stills today; short recordings on the roadmap.</p>
+        <ul class="mode-list">
+          <li>
+            <div>
+              <span class="name">Shots</span>
+              <span class="state">available</span>
+            </div>
+            <p class="job">Still capture of the active app or a named window, with card + metadata.</p>
+          </li>
+          <li>
+            <div>
+              <span class="name">Reels</span>
+              <span class="state">planned</span>
+            </div>
+            <p class="job">Short desktop recordings with the same framing system. Not shipped as capture yet.</p>
+          </li>
+          <li>
+            <div>
+              <span class="name">GIF export</span>
+              <span class="state">after Reels</span>
+            </div>
+            <p class="job">Loops from finished Reels as a delivery format, not a capture mode.</p>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section id="links" class="px-6 md:px-10 py-14 max-w-4xl mx-auto">
-      <div class="section-rule mb-8"><h2 class="kicker m-0">[ 07 &middot; LINKS ]</h2></div>
-      <p class="max-w-2xl mb-5" style="color: var(--text-muted);">
-        Cloche is part of the Brigade fleet from Escoffier Labs: small, sharp tools for running an
-        always-on agent stack. Browse the source, grab a release, or explore the rest of the kitchen.
-      </p>
-      <div class="flex flex-wrap gap-3">
-        <a href="/compare/screenshots-for-ai-agents" class="text-sm px-4 py-2 rounded-md border inline-block"
-          style="border-color: var(--hairline); background: var(--bg-panel);">Screenshots for AI agents &rarr;</a>
-        <a href={EXTERNAL.github} class="text-sm px-4 py-2 rounded-md border inline-block"
-          style="border-color: var(--hairline); background: var(--bg-panel);">Source on GitHub &rarr;</a>
-        <a href={EXTERNAL.releases} class="text-sm px-4 py-2 rounded-md border inline-block"
-          style="border-color: var(--hairline); background: var(--bg-panel);">Releases &rarr;</a>
-        <a href={EXTERNAL.escoffier} class="text-sm px-4 py-2 rounded-md border inline-block"
-          style="border-color: var(--hairline); background: var(--bg-panel);">Escoffier Labs &rarr;</a>
-        <a href={EXTERNAL.brigade} class="text-sm px-4 py-2 rounded-md border inline-block"
-          style="border-color: var(--hairline); background: var(--bg-panel);">The Brigade fleet &rarr;</a>
-        <a href={EXTERNAL.cookbook} class="text-sm px-4 py-2 rounded-md border inline-block"
-          style="border-color: var(--hairline); background: var(--bg-panel);">Cookbook &rarr;</a>
+    <section class="band" id="agents">
+      <div class="wrap">
+        <h2>Same command for shell and agents</h2>
+        <p class="lede">
+          Agent-neutral by design. Codex, OpenClaw, Claude Code, Hermes, a local MCP client, or a
+          plain script all share one path.
+        </p>
+        <div class="copy-block">
+          <button type="button" class="copy-btn" data-copy>Copy</button>
+          <pre>{`{ "type": "localImage", "path": "/abs/path/shot.png", "detail": "high" }`}</pre>
+        </div>
+        <p class="dim" style="margin-top:12px">
+          <code>cloche codex-payload</code> builds a Codex turn/start payload from a shot directory.
+          <code>cloche mcp</code> exposes the same code path over stdio.
+        </p>
+      </div>
+    </section>
+
+    <section class="band" id="commands">
+      <div class="wrap">
+        <h2>Commands you will actually use</h2>
+        <table class="cmd-table">
+          <thead>
+            <tr><th>Command</th><th>What it does</th></tr>
+          </thead>
+          <tbody>
+            {COMMANDS.map((c) => (
+              <tr>
+                <td>cloche {c.cmd}</td>
+                <td>{c.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="dim" style="margin-top:16px">
+          The <code>appshots</code> binary remains an alias for the same code path.
+        </p>
+      </div>
+    </section>
+
+    <section class="band" id="name">
+      <div class="wrap">
+        <h2>Why it's called Cloche</h2>
+        <p class="lede">
+          A cloche is the silver dome that presents a dish cleanly. Lift it, and the plate is ready.
+        </p>
+        <ClocheReveal />
+      </div>
+    </section>
+
+    <section class="band" id="fleet">
+      <div class="wrap">
+        <h2>Part of the kitchen</h2>
+        <p class="lede">
+          Built by Escoffier Labs. Works alone; pairs with Brigade when you want receipts around the
+          work that produced the shot.
+        </p>
+        <p class="fleet-note dim">
+          <a href={EXTERNAL.github}>GitHub</a>
+          ·
+          <a href={EXTERNAL.releases}>Releases</a>
+          ·
+          <a href="/compare/screenshots-for-ai-agents">Screenshots for AI agents</a>
+          ·
+          <a href={EXTERNAL.brigade}>Brigade</a>
+          ·
+          <a href={EXTERNAL.escoffier}>Escoffier Labs</a>
+        </p>
       </div>
     </section>
 
     <FleetLinks current="cloche-site" />
-  </main>
-</BaseLayout>
+  </div>
 
-<style>
-  .hero-glow {
-    background: radial-gradient(ellipse 50% 55% at 50% 28%, color-mix(in srgb, var(--accent) 7%, transparent) 0%, transparent 70%);
-  }
-  .hero { padding-bottom: 1.5rem; }
-</style>
+  <script>
+    document.querySelectorAll('.product [data-copy]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const pre = (btn as HTMLElement).closest('.copy-block')?.querySelector('pre');
+        if (!pre) return;
+        const text = pre.innerText.replace(/\u00a0/g, ' ').replace(/\s+$/g, '') + '\n';
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          /* ignore */
+        }
+        const el = btn as HTMLElement;
+        el.textContent = 'Copied';
+        setTimeout(() => {
+          el.textContent = 'Copy';
+        }, 1500);
+      });
+    });
+  </script>
+</BaseLayout>
