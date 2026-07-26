@@ -198,9 +198,10 @@
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  object-position: center;
   border-radius: 6px;
   border: 1px solid var(--hairline-strong);
-  background: #0a0c10;
+  background: #050608;
   transform-origin: center center;
   transition:
     transform 180ms ease,
