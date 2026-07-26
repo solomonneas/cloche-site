@@ -22,7 +22,6 @@ export const NAV_LINKS = [
 
 export const EXTERNAL = {
   github: 'https://github.com/escoffier-labs/cloche',
-  stargazers: 'https://github.com/escoffier-labs/cloche/stargazers',
   // Live shadcn-styled GitHub stars badge (shieldcn.dev). Two modes, swapped to match the theme toggle.
   starsBadgeDark: 'https://shieldcn.dev/github/stars/escoffier-labs/cloche.svg?variant=secondary&mode=dark',
   starsBadgeLight: 'https://shieldcn.dev/github/stars/escoffier-labs/cloche.svg?variant=secondary&mode=light',
