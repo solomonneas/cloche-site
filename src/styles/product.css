@@ -194,8 +194,9 @@
 .product .space-rail img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
   border-radius: 6px;
   border: 1px solid var(--hairline-strong);
   background: #0a0c10;
