@@ -29,7 +29,8 @@ For large scoping work, invoke `ultra-work-scout` first. It is installed with th
 
 ## Git
 
-- Do not add `Co-Authored-By` or AI-attribution trailers to commits, PR bodies, or public docs.
+- Do not add `Co-Authored-By` or AI-attribution trailers to commits or public docs.
+- Follow the GitHub agent attribution section in [AGENTS.md](AGENTS.md#github-agent-attribution) for issues, pull requests, comments, and reviews.
 - Use conventional commits.
 - Never bypass pre-push hooks (`--no-verify`) unless the user has explicitly accepted the risk.
 - Never push to `main` directly on shared repos. Feature branch + PR.
